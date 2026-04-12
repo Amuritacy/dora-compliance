@@ -1,62 +1,50 @@
-# ESG Regulatory Gap Analysis Tool
+# DORA Compliance Checker
 
-Maps corporate ESG disclosures against three major EU regulatory frameworks — **CSRD**, **EU Taxonomy**, and **SFDR** — and produces prioritised gap analysis reports.
+Assesses ICT risk management controls against the **Digital Operational Resilience Act** (EU 2022/2554), covering all five chapters and 77 individual requirements.
 
-## Frameworks Covered
+## Coverage
 
-| Framework | Scope | Key Output |
-|-----------|-------|------------|
-| **CSRD** (EU 2022/2464) | All ESRS topics (E1–E5, S1–S4, G1) | Disclosure rate, quality score by ESRS topic |
-| **EU Taxonomy** (EU 2020/852) | 6 environmental objectives, KPI metrics | Taxonomy-alignment gaps by objective |
-| **SFDR** (EU 2019/2088) | Entity-level + 14 mandatory PAI indicators | PAI coverage and quality |
+| Chapter | Article Range | Controls |
+|---------|--------------|----------|
+| ICT Risk Management | Art. 5–16 | 46 |
+| ICT Incident Reporting | Art. 17–23 | 11 |
+| Digital Resilience Testing | Art. 24–27 | 12 |
+| ICT Third-Party Risk | Art. 28–44 | 16 |
+| Information Sharing | Art. 45 | 2 |
 
-## Features
+## Maturity Scale
 
-- Scores each disclosure on a **0–3 quality scale** (Missing → Best Practice)
-- Prioritises gaps as **Critical / High / Medium**
-- Exports structured **CSV** for Power BI / Excel analysis
-- Generates a formatted **executive text report**
+| Level | Label | Description |
+|-------|-------|-------------|
+| 0 | Not Implemented | No control in place |
+| 1 | Ad Hoc | Exists informally, undocumented |
+| 2 | Defined | Documented policy/process |
+| 3 | Optimised | Regularly tested, improved, evidenced |
 
 ## Usage
 
 ```bash
-# Install dependencies (none beyond stdlib)
-python main.py
-
-# With custom company name
-python main.py --company "Your Company AG"
+python dora_checker.py
 ```
 
 ## Output
 
 ```
 outputs/
-  esg_gap_analysis_YYYY-MM-DD.csv   # Full gap register
-reports/
-  esg_report_YYYY-MM-DD.txt         # Executive summary report
+  dora_compliance_YYYY-MM-DD.csv    # Full control register with evidence
+  dora_compliance_YYYY-MM-DD.txt    # Executive report with gap analysis
 ```
 
-## Adapting to Your Company
+## Adapting to Your Organisation
 
-Edit `sample_data.py` to reflect your company's actual disclosures:
+Edit the `SAMPLE_CONTROLS` dictionary in `dora_checker.py`:
 
 ```python
-CSRD_DISCLOSURES = {
-    "GHG emissions (Scope 1, 2, 3)": (True, 2, "Scope 1&2 reported; Scope 3 partial"),
-    #                                  ^disclosed ^quality(0-3) ^notes
+SAMPLE_CONTROLS = {
+    "Management body accountable for ICT risk": (True, 3, "Board CISO appointed", ""),
+    #                                            ^impl ^maturity ^evidence       ^gap
 }
 ```
 
-## Project Structure
-
-```
-esg-gap-analysis/
-├── main.py          # Entry point
-├── frameworks.py    # CSRD / EU Taxonomy / SFDR requirement definitions
-├── analyzer.py      # Gap scoring engine
-├── reporter.py      # CSV and text report generation
-└── sample_data.py   # Sample corporate disclosure data
-```
-
 ---
-*Author: Amra Gadzo · [LinkedIn](https://linkedin.com/in/amra-gadzo-98447533) · [GitHub](https://github.com/Amuritacy)*
+*Author: Amra Gadzo · [LinkedIn](https://linkedin.com/in/amra-gadzo-98447533) · [GitHub](https://github.com/Amuritacy)*/amra-gadzo-98447533) · [GitHub](https://github.com/Amuritacy)*
